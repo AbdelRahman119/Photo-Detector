@@ -1,0 +1,25 @@
+// VerilogA for my_Grad_proJ, Photo_Detector, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+
+
+
+module Photo_Detector( iout_p, iout_n, E_real, E_img );
+
+input  E_real, E_img;
+output iout_n, iout_p;
+electrical iout_n, iout_p, E_real, E_img;
+parameter real Responsitivity = 1;
+parameter real cap = 50f;
+parameter real Rs = 0;
+real power;
+
+   analog begin
+		power  = pow(V(E_img),2) + pow(V(E_real),2);
+		I(iout_p,iout_n) <+ Responsitivity*power;
+
+   end
+
+endmodule
